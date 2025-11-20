@@ -48,25 +48,25 @@
 
         .tab {
             padding: 12px 30px;
-            background: #f0f0f0;
+            background: #e8e8e8;
             border: none;
             border-radius: 25px;
             cursor: pointer;
             font-size: 16px;
             font-weight: 600;
             transition: all 0.3s;
-            color: #666;
+            color: #888;
         }
 
         .tab:hover {
-            background: #e0e0e0;
+            background: #d5d5d5;
             transform: translateY(-2px);
         }
 
         .tab.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #6b7bd6;
             color: white;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 5px 15px rgba(107, 123, 214, 0.4);
         }
 
         .animation-container {
@@ -81,41 +81,48 @@
 
         /* Read Replica 스타일 */
         .read-replica {
-            display: grid;
-            grid-template-columns: 200px 1fr 200px;
-            gap: 60px;
-            align-items: start;
-            padding: 40px 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 60px 40px;
+            gap: 80px;
         }
 
         .left-section {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 30px;
+            align-items: center;
         }
 
         .section-title {
-            font-weight: 700;
-            font-size: 18px;
+            font-weight: 600;
+            font-size: 24px;
             color: #333;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .app-server-group {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
         .server {
-            width: 180px;
-            height: 60px;
+            width: 200px;
+            height: 70px;
             border: 3px solid #333;
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             background: white;
         }
 
         .server-dot {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background: #333;
             border-radius: 50%;
         }
@@ -125,7 +132,20 @@
             flex-direction: column;
             align-items: center;
             gap: 40px;
-            padding-top: 20px;
+        }
+
+        .db-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .section-label {
+            font-weight: 600;
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
         }
 
         .db-container {
@@ -133,13 +153,6 @@
             flex-direction: column;
             align-items: center;
             position: relative;
-        }
-
-        .section-label {
-            font-weight: 700;
-            font-size: 20px;
-            margin-bottom: 30px;
-            color: #555;
         }
 
         .database {
@@ -173,21 +186,129 @@
         }
 
         .label {
-            margin-top: 20px;
+            margin-top: 15px;
             font-weight: 700;
             text-align: center;
-            font-size: 18px;
+            font-size: 20px;
         }
 
-        .label.primary { color: #ff6b35; }
-        .label.replica { color: #ff6b35; }
+        .label.primary { color: #ff8c42; }
+        .label.replica { color: #ff8c42; }
+
+        .connection-arrow {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 20px;
+        }
+
+        .arrow-line {
+            width: 120px;
+            height: 3px;
+            background: #666;
+            position: relative;
+        }
+
+        .arrow-line::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 12px solid #666;
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+        }
+
+        .arrow-label {
+            font-size: 16px;
+            color: #333;
+            white-space: nowrap;
+        }
+
+        .data-particle {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: #667eea;
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        .particle-rw {
+            animation: flow-to-primary 3s infinite;
+        }
+
+        .particle-replication {
+            animation: flow-replication 3s infinite;
+            animation-delay: 1s;
+        }
+
+        .particle-ro {
+            animation: flow-from-replica 3s infinite;
+            animation-delay: 2s;
+        }
+
+        @keyframes flow-to-primary {
+            0% {
+                left: 230px;
+                top: 200px;
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            40% {
+                left: 50%;
+                top: 200px;
+                opacity: 1;
+            }
+            50% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        @keyframes flow-replication {
+            0% {
+                top: 290px;
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            40% {
+                top: 440px;
+                opacity: 1;
+            }
+            50% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        @keyframes flow-from-replica {
+            0% {
+                right: 50%;
+                top: 540px;
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            40% {
+                right: 230px;
+                top: 540px;
+                opacity: 1;
+            }
+            50% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        .replication-flow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
 
         .replication-arrow {
             width: 4px;
-            height: 80px;
-            background: #ff6b35;
+            height: 100px;
+            background: #ff8c42;
             position: relative;
-            margin: 20px 0;
         }
 
         .replication-arrow::after {
@@ -198,115 +319,73 @@
             transform: translateX(-50%);
             width: 0;
             height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-top: 12px solid #ff6b35;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 14px solid #ff8c42;
         }
 
         .replication-label {
-            position: absolute;
-            left: 20px;
-            background: white;
-            padding: 8px 15px;
-            border-radius: 8px;
-            font-size: 14px;
-            color: #ff6b35;
+            font-size: 16px;
+            color: #ff8c42;
             font-weight: 600;
-            white-space: nowrap;
+            text-align: center;
         }
 
         .right-section {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
-            padding-top: 280px;
+            gap: 30px;
         }
 
         .reporting-label {
-            font-weight: 700;
-            font-size: 14px;
-            color: #4ecdc4;
-            margin-bottom: 10px;
-        }
-
-        .data-particle {
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            background: #667eea;
-            border-radius: 50%;
-            animation: particle-flow 3s infinite;
-            opacity: 0;
-        }
-
-        @keyframes particle-flow {
-            0% { opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-
-        .particle-1 { top: 80px; left: 220px; animation-delay: 0s; }
-        .particle-2 { top: 320px; left: 50%; animation-delay: 1s; }
-        .particle-3 { top: 380px; right: 220px; animation-delay: 2s; }
-
-        .connection-line {
-            position: absolute;
-            height: 3px;
-            background: #999;
-        }
-
-        .arrow-tip {
-            position: absolute;
-            right: -10px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0;
-            height: 0;
-            border-left: 10px solid #999;
-            border-top: 6px solid transparent;
-            border-bottom: 6px solid transparent;
-        }
-
-        .rw-line {
-            width: 140px;
-            top: 80px;
-            left: 200px;
-        }
-
-        .ro-line {
-            width: 140px;
-            top: 380px;
-            right: 200px;
+            font-weight: 600;
+            font-size: 16px;
+            color: #0ea5e9;
+            text-align: center;
         }
 
         /* Multi-AZ 스타일 */
         .multi-az {
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             align-items: center;
-            padding: 40px;
-            gap: 60px;
+            padding: 60px;
+            gap: 80px;
+            position: relative;
         }
 
         .az-zone {
-            padding: 40px 30px;
+            padding: 50px 40px;
             border: 3px dashed #ff9800;
             border-radius: 20px;
             background: #fff8e1;
-            min-width: 280px;
+            min-width: 300px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 30px;
+            gap: 35px;
         }
 
         .az-label {
             font-weight: 700;
             color: #ff9800;
-            font-size: 18px;
+            font-size: 20px;
             align-self: flex-start;
+        }
+
+        .az-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            width: 100%;
+        }
+
+        .zone-title {
+            font-weight: 600;
+            font-size: 18px;
+            color: #666;
         }
 
         .app-servers {
@@ -315,27 +394,38 @@
             gap: 15px;
         }
 
+        .dns-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
         .dns-box {
-            width: 140px;
-            height: 60px;
+            width: 160px;
+            height: 70px;
             background: #333;
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 18px;
+            font-size: 20px;
             border-radius: 10px;
         }
 
         .db-failed {
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
         }
 
         .db-status {
             position: absolute;
-            top: -20px;
-            right: -20px;
+            top: -15px;
+            right: -15px;
             width: 50px;
             height: 50px;
             background: #f44336;
@@ -352,67 +442,120 @@
 
         @keyframes pulse-error {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            50% { transform: scale(1.15); }
         }
 
         .failure-label {
-            margin-top: 15px;
             color: #f44336;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 16px;
         }
 
-        .failover-container {
-            position: relative;
+        .failover-section {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 20px;
+            position: relative;
+        }
+
+        .failover-arrow-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
         .failover-arrow {
-            width: 200px;
-            height: 4px;
+            width: 180px;
+            height: 6px;
             background: #e91e63;
             position: relative;
-            animation: flow-arrow 2s infinite;
+            animation: flow-failover 2s infinite;
         }
 
         .failover-arrow::after {
             content: '';
             position: absolute;
-            right: -14px;
+            right: -16px;
             top: 50%;
             transform: translateY(-50%);
             width: 0;
             height: 0;
-            border-left: 14px solid #e91e63;
-            border-top: 8px solid transparent;
-            border-bottom: 8px solid transparent;
+            border-left: 16px solid #e91e63;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            animation: arrow-pulse 2s infinite;
         }
 
-        @keyframes flow-arrow {
-            0%, 100% { opacity: 0.5; }
+        @keyframes flow-failover {
+            0%, 100% { opacity: 0.6; }
             50% { opacity: 1; }
+        }
+
+        @keyframes arrow-pulse {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-50%) scale(1.2); }
         }
 
         .failover-label {
             background: #e91e63;
             color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
+            padding: 10px 25px;
+            border-radius: 25px;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 16px;
+        }
+
+        .standby-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
         }
 
         .standby-badge {
             background: #4caf50;
             color: white;
-            padding: 5px 15px;
-            border-radius: 15px;
-            font-size: 13px;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 14px;
             font-weight: 600;
-            margin-top: 10px;
+        }
+
+        .connection-line-az {
+            position: absolute;
+            width: 3px;
+            height: 60px;
+            background: #ff9800;
+            top: 180px;
+        }
+
+        .line-left {
+            left: 42%;
+            animation: connection-pulse 2s infinite;
+        }
+
+        .line-right {
+            right: 42%;
+            background: #4caf50;
+            animation: connection-pulse 2s infinite;
+            animation-delay: 1s;
+        }
+
+        @keyframes connection-pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .new-standby-line {
+            position: absolute;
+            width: 120px;
+            height: 3px;
+            background: #9e9e9e;
+            border: 2px dashed #9e9e9e;
+            background: transparent;
+            right: 340px;
+            top: 450px;
         }
 
         /* Aurora 스타일 */
@@ -606,6 +749,99 @@
             text-align: center;
             margin-bottom: 5px;
         }
+
+        /* 비교 표 스타일 */
+        .comparison-table {
+            margin-top: 60px;
+            padding: 40px;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+
+        .table-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        th:first-child {
+            background: #4a5568;
+            text-align: left;
+        }
+
+        td {
+            padding: 16px;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        td:first-child {
+            background: #f7fafc;
+            font-weight: 600;
+            color: #2d3748;
+            text-align: left;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background: #f7fafc;
+        }
+
+        .highlight-cell {
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .badge-yes {
+            background: #48bb78;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            display: inline-block;
+        }
+
+        .badge-no {
+            background: #f56565;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            display: inline-block;
+        }
+
+        .badge-neutral {
+            background: #cbd5e0;
+            color: #2d3748;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
@@ -620,50 +856,69 @@
 
     <!-- Read Replica -->
     <div id="read-replica" class="animation-container active">
-        <div class="read-replica">
+        <div class="read-replica" style="position: relative;">
+            <!-- Left: Application servers -->
             <div class="left-section">
                 <div class="section-title">애플리케이션 서버</div>
-                <div class="server">
-                    <div class="server-dot"></div>
-                    <div class="server-dot"></div>
-                    <div class="server-dot"></div>
-                </div>
-                <div class="server">
-                    <div class="server-dot"></div>
-                    <div class="server-dot"></div>
-                    <div class="server-dot"></div>
+                <div class="app-server-group">
+                    <div class="server">
+                        <div class="server-dot"></div>
+                        <div class="server-dot"></div>
+                        <div class="server-dot"></div>
+                    </div>
+                    <div class="server">
+                        <div class="server-dot"></div>
+                        <div class="server-dot"></div>
+                        <div class="server-dot"></div>
+                    </div>
                 </div>
             </div>
 
+            <!-- Middle: Database server -->
             <div class="middle-section">
                 <div class="section-label">데이터베이스 서버</div>
 
-                <div class="db-container">
-                    <div class="database">
-                        <div class="db-body"></div>
-                        <div class="db-cylinder"></div>
-                        <div class="db-cylinder"></div>
-                        <div class="db-cylinder"></div>
+                <div class="db-section">
+                    <div class="connection-arrow">
+                        <div class="arrow-line"></div>
+                        <span class="arrow-label">읽기/쓰기</span>
+                        <div class="arrow-line"></div>
                     </div>
-                    <div class="label primary">주 서버</div>
-                </div>
 
-                <div style="position: relative; width: 100%;">
-                    <div class="replication-arrow"></div>
-                    <div class="replication-label">비동기식<br>복제</div>
-                </div>
-
-                <div class="db-container">
-                    <div class="database">
-                        <div class="db-body"></div>
-                        <div class="db-cylinder"></div>
-                        <div class="db-cylinder"></div>
-                        <div class="db-cylinder"></div>
+                    <div class="db-container">
+                        <div class="database">
+                            <div class="db-body"></div>
+                            <div class="db-cylinder"></div>
+                            <div class="db-cylinder"></div>
+                            <div class="db-cylinder"></div>
+                        </div>
+                        <div class="label primary">주 서버</div>
                     </div>
-                    <div class="label replica">읽기 복제본</div>
+
+                    <div class="replication-flow">
+                        <div class="replication-arrow"></div>
+                        <div class="replication-label">비동기식<br>복제</div>
+                    </div>
+
+                    <div class="db-container">
+                        <div class="database">
+                            <div class="db-body"></div>
+                            <div class="db-cylinder"></div>
+                            <div class="db-cylinder"></div>
+                            <div class="db-cylinder"></div>
+                        </div>
+                        <div class="label replica">읽기 복제본</div>
+                    </div>
+
+                    <div class="connection-arrow" style="flex-direction: row-reverse;">
+                        <div class="arrow-line"></div>
+                        <span class="arrow-label">읽기 전용</span>
+                        <div class="arrow-line"></div>
+                    </div>
                 </div>
             </div>
 
+            <!-- Right: BI/reporting server -->
             <div class="right-section">
                 <div class="reporting-label">BI/리포팅<br>애플리케이션 서버</div>
                 <div class="server">
@@ -673,71 +928,93 @@
                 </div>
             </div>
 
-            <div class="connection-line rw-line">
-                <div class="arrow-tip"></div>
-            </div>
-            <div class="connection-line ro-line">
-                <div class="arrow-tip"></div>
-            </div>
-
-            <div class="data-particle particle-1"></div>
-            <div class="data-particle particle-2"></div>
-            <div class="data-particle particle-3"></div>
+            <!-- Animated particles -->
+            <div class="data-particle particle-rw"></div>
+            <div class="data-particle particle-replication"></div>
+            <div class="data-particle particle-ro"></div>
         </div>
     </div>
 
     <!-- Multi-AZ -->
     <div id="multi-az" class="animation-container">
         <div class="multi-az">
+            <!-- Availability Zone A -->
             <div class="az-zone">
                 <div class="az-label">가용 영역 A</div>
 
-                <div class="app-servers">
-                    <div class="server">
-                        <div class="server-dot"></div>
-                        <div class="server-dot"></div>
-                        <div class="server-dot"></div>
+                <div class="az-content">
+                    <div class="zone-title">애플리케이션 서버</div>
+                    <div class="app-servers">
+                        <div class="server">
+                            <div class="server-dot"></div>
+                            <div class="server-dot"></div>
+                            <div class="server-dot"></div>
+                        </div>
+                        <div class="server">
+                            <div class="server-dot"></div>
+                            <div class="server-dot"></div>
+                            <div class="server-dot"></div>
+                        </div>
                     </div>
-                    <div class="server">
-                        <div class="server-dot"></div>
-                        <div class="server-dot"></div>
-                        <div class="server-dot"></div>
-                    </div>
-                </div>
 
-                <div class="dns-box">DNS</div>
-
-                <div class="db-failed">
-                    <div class="db-status">×</div>
-                    <div class="database">
-                        <div class="db-body"></div>
-                        <div class="db-cylinder"></div>
-                        <div class="db-cylinder"></div>
-                        <div class="db-cylinder"></div>
+                    <div class="dns-container">
+                        <div class="dns-box">DNS</div>
                     </div>
-                    <div class="failure-label">데이터베이스 장애</div>
+
+                    <div class="db-failed">
+                        <div class="zone-title">데이터베이스 장애</div>
+                        <div class="db-status">×</div>
+                        <div class="database">
+                            <div class="db-body"></div>
+                            <div class="db-cylinder"></div>
+                            <div class="db-cylinder"></div>
+                            <div class="db-cylinder"></div>
+                        </div>
+                        <div class="failure-label">장애 발생</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="failover-container">
+            <!-- Failover Arrow -->
+            <div class="failover-section">
+                <div class="failover-arrow-container">
+                    <div class="failover-arrow"></div>
+                </div>
                 <div class="failover-label">DNS 장애 조치</div>
-                <div class="failover-arrow"></div>
             </div>
 
+            <!-- Availability Zone B -->
             <div class="az-zone">
                 <div class="az-label">가용 영역 B</div>
 
-                <div class="db-container" style="margin-top: 150px;">
-                    <div class="database">
-                        <div class="db-body"></div>
-                        <div class="db-cylinder"></div>
-                        <div class="db-cylinder"></div>
-                        <div class="db-cylinder"></div>
+                <div class="az-content">
+                    <div class="standby-section">
+                        <div class="zone-title">대기 서버</div>
+                        <div class="database">
+                            <div class="db-body"></div>
+                            <div class="db-cylinder"></div>
+                            <div class="db-cylinder"></div>
+                            <div class="db-cylinder"></div>
+                        </div>
+                        <div class="label primary">주 서버</div>
                     </div>
-                    <div class="label primary">주 서버</div>
-                    <div class="standby-badge">새로운 대기 서버</div>
+
+                    <div class="standby-section">
+                        <div class="database" style="opacity: 0.5;">
+                            <div class="db-body"></div>
+                            <div class="db-cylinder"></div>
+                            <div class="db-cylinder"></div>
+                            <div class="db-cylinder"></div>
+                        </div>
+                        <div class="standby-badge">새로운 대기 서버</div>
+                    </div>
                 </div>
             </div>
+
+            <!-- Connection lines -->
+            <div class="connection-line-az line-left"></div>
+            <div class="connection-line-az line-right"></div>
+            <div class="new-standby-line"></div>
         </div>
     </div>
 
@@ -807,6 +1084,59 @@
             </div>
         </div>
     </div>
+</div>
+
+<!-- 비교 표 -->
+<div class="comparison-table">
+    <div class="table-title">📊 데이터베이스 복제 방식 비교</div>
+    <table>
+        <thead>
+        <tr>
+            <th>구분</th>
+            <th>Multi-AZ</th>
+            <th>Read Replica</th>
+            <th>Aurora</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>복제 방식</td>
+            <td class="highlight-cell">동기 복제</td>
+            <td class="highlight-cell">비동기 복제</td>
+            <td class="highlight-cell">스토리지 6중 복제</td>
+        </tr>
+        <tr>
+            <td>목적</td>
+            <td>장애복구(HA)</td>
+            <td>읽기 부하 분산</td>
+            <td>고성능 + HA + 자동 확장</td>
+        </tr>
+        <tr>
+            <td>읽기 가능</td>
+            <td><span class="badge-no">❌ Standby 읽기 불가</span></td>
+            <td><span class="badge-yes">⭕ 읽기 전용</span></td>
+            <td><span class="badge-yes">⭕ 읽기 전용 Replica</span></td>
+        </tr>
+        <tr>
+            <td>Replica 개수</td>
+            <td><span class="badge-neutral">1개 (Standby)</span></td>
+            <td><span class="badge-neutral">여러 개</span></td>
+            <td><span class="badge-neutral">최대 15개</span></td>
+        </tr>
+        <tr>
+            <td>Failover</td>
+            <td class="highlight-cell">자동</td>
+            <td class="highlight-cell">수동 승격</td>
+            <td class="highlight-cell">매우 빠른 자동</td>
+        </tr>
+        <tr>
+            <td>엔진</td>
+            <td>표준 RDS</td>
+            <td>표준 RDS</td>
+            <td>AWS 전용 엔진</td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 <script>
